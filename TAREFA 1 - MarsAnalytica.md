@@ -141,8 +141,6 @@ for combo in product(*candidates):
         break
 ```
 
-**Observação prática:** no caso real cada bloco reduziu a poucas dezenas de candidatos; o passo final (combinação) foi trivial.
-
 
 ```
 $ python3 resolve_no_tritao.py
@@ -158,5 +156,6 @@ Found serial: b"q4Eo-eyMq-1dd0-leKx"
 
 
 É perfeitamente possível recuperar o serial por engenharia reversa tradicional: localizar e entender a rotina de verificação no decompiler, inverter transformações (ou brute-force localmente) e automatizar a inversão com um script Python. Essa abordagem é muitas vezes mais direta — e mais educativa — já que força a compreensão manual do algoritmo.
+
 
 
