@@ -12,12 +12,14 @@ O binário lê uma string (Citizen Access ID) da stdin, valida essa string atrav
 
 Comandos iniciais usados:
 
-```bash
+```
 $ file tarefa1
 # -> ELF 64-bit LSB executable, x86-64, statically linked, no section header
 
 $ sha256sum tarefa1
-# -> 8bb5b9ce99c6ea8cb41ad21d6fe5e54d12d24cf7be7cbccc2ff63f3427444176 ```
+# -> 8bb5b9ce99c6ea8cb41ad21d6fe5e54d12d24cf7be7cbccc2ff63f3427444176
+
+```
 
 ## Localizando a função de validação
 
@@ -156,4 +158,5 @@ Found serial: b"q4Eo-eyMq-1dd0-leKx"
 
 
 É perfeitamente possível recuperar o serial por engenharia reversa tradicional: localizar e entender a rotina de verificação no decompiler, inverter transformações (ou brute-force localmente) e automatizar a inversão com um script Python. Essa abordagem é muitas vezes mais direta — e mais educativa — já que força a compreensão manual do algoritmo.
+
 
