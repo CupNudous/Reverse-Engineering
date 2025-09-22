@@ -23,9 +23,9 @@ strings tarefa0.bin | egrep -i "Password:|Incorrect password|Your password|[A-Za
 * `strings` revelou mensagens claras de validação (`Password:`, `Incorrect password...`, `Your password is correct!`) e várias strings curtas em `.rodata` que pareciam ofuscadas.
 
 
-#### Função "xorge"
+#### Função "xored"
 
-Ao analisar a disassembly com `objdump -d` e navegando com `r2` / `radare2`, identifiquei uma função recorrente que realiza operações byte-a-byte entre duas `std::string` e concatena resultados. Pelo padrão e pelas chamadas, chamei de `xorge`.
+Ao analisar a disassembly com `objdump -d` e navegando com `r2` / `radare2`, identifiquei uma função recorrente que realiza operações byte-a-byte entre duas `std::string` e concatena resultados. Pelo padrão e pelas chamadas, ela recebe o nome de `xored`.
 
 Trecho de comportamento observado (resumido):
 
@@ -38,7 +38,7 @@ Trecho de comportamento observado (resumido):
 
 #### Extrair as strings
 
-As strings em `.rodata` não eram a senha final — eram insumos. A disassembly mostra em que ordem elas são passadas para `xorge`. Combinando a ordem das chamadas e as literais encontradas, é possível reproduzir o processo fora do binário.
+As strings em `.rodata` não eram a senha final — eram insumos. A disassembly mostra em que ordem elas são passadas para `xored`. Combinando a ordem das chamadas e as literais encontradas, é possível reproduzir o processo fora do binário.
 
 Exemplo de strings encontradas em `.rodata`:
 
@@ -50,7 +50,7 @@ S5do7apOWcl``clx
 
 #### Reproduzir o XOR em Python
 
-Para garantir que a lógica foi corretamente entendida, implementei uma reprodução em Python que emula o comportamento `xorge` e encadeia as operações na mesma ordem do binário.
+Para garantir que a lógica foi corretamente entendida, implementei uma reprodução em Python que emula o comportamento `xored` e encadeia as operações na mesma ordem do binário.
 
 Código usado para reproduzir a cadeia:
 
@@ -106,3 +106,4 @@ Explicação curta: a cadeia de XORs aplicada, na ordem observada na disassembly
 
 * O uso de constantes armazenadas no binário e de operações reversíveis (XOR) permite recuperar valores secretos se o algoritmo e as literais puderem ser examinadas estaticamente.
 * Técnicas de ofuscação mais robustas (ex.: derivação via KDF/HMAC, remoção de literais ou carregamento via rede em tempo de execução) dificultariam a recuperação.
+
