@@ -25,11 +25,11 @@ $ sha256sum tarefa1
 
 ### 1) Procurando referências à string
 
-No Ghidra foi usado `Search -> For Strings` e localizei `"Citizen Access ID:"`. Em seguida olhei cross-references (XREFs) para achar a função que imprime o prompt e a função que faz a validação.
+No Ghidra foi usado `Search -> For Strings` e localizei `"Citizen Access ID:"`. Em seguida olhei cross-references (XREFs) para achar a função que imprime o prompt e todas as funções que realizam a validação da entrada.
 
-### 2) Decompilando a função de validação
+### 2) Decompilando as funções de validação
 
-Abrimos a função de validação no decompiler. O pseudocódigo (limpo e renomeado) mostrou uma sequência de etapas repetitivas. A versão simplificada ficou assim:
+Após analisar as funções que realizam a validação de entrada e a saída dos caracteres, como o pseudocódigo (limpo e renomeado) mostrou uma sequência de etapas repetitivas, pode-se gerar uma versão simplificada das operações realizadas pelo binário, que ficou assim:
 
 ```c
 bool validate(char *s) {
@@ -155,7 +155,8 @@ Found serial: b"q4Eo-eyMq-1dd0-leKx"
 ``FLAG-l0rdoFb1Nq4EoeyMq1dd0leKx``
 
 
-É perfeitamente possível recuperar o serial por engenharia reversa tradicional: localizar e entender a rotina de verificação no decompiler, inverter transformações (ou brute-force localmente) e automatizar a inversão com um script Python. Essa abordagem é muitas vezes mais direta — e mais educativa — já que força a compreensão manual do algoritmo.
+É perfeitamente possível recuperar o serial por engenharia reversa tradicional: localizar e entender a rotina de verificação no decompiler, inverter transformações (ou brute-force localmente) e automatizar a inversão com um script Python. Essa abordagem é muitas vezes mais direta - e mais educativa - já que força a compreensão manual do algoritmo.
+
 
 
 
