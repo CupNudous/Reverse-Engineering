@@ -19,15 +19,6 @@ $ file tarefa1
 $ sha256sum tarefa1
 # -> 8bb5b9ce99c6ea8cb41ad21d6fe5e54d12d24cf7be7cbccc2ff63f3427444176
 
-$ strings -n 4 tarefa1 | egrep -i "Citizen|ACCESS|FLAG|getchar|read"
-# -> Citizen Access ID:
-#    [!] ACCESS DENIED - Invalid Citizen ID
-#    [+] ACCESS GRANTED!
-```
-
-**Observação:** poucas strings úteis, o que indica empacotamento/ofuscação.
-
-
 ## Localizando a função de validação
 
 ### 1) Procurando referências à string
@@ -162,5 +153,6 @@ Found serial: b"q4Eo-eyMq-1dd0-leKx"
 [![Screenshot-2025-09-20-161917.png](https://i.postimg.cc/K8BnWptR/Screenshot-2025-09-20-161917.png)](https://postimg.cc/fVWttK2N)
 
 ``FLAG-l0rdoFb1Nq4EoeyMq1dd0leKx``
+
 
 É perfeitamente possível recuperar o serial por engenharia reversa tradicional: localizar e entender a rotina de verificação no decompiler, inverter transformações (ou brute-force localmente) e automatizar a inversão com um script Python. Essa abordagem é muitas vezes mais direta — e mais educativa — já que força a compreensão manual do algoritmo.
